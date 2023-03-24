@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Implements hook_file_download().
+ */
+function pfdp_file_test_allow_file_download($uri)
+{
+  $allow = \Drupal::state()->get('pfdp_file_test_allow.allow_next', FALSE);
+  \Drupal::state()->set('pfdp_file_test_allow.allow_next', FALSE);
+  if(!$allow){
+    return -1;
+  }
+
+  $file_repository = \Drupal::service('file.repository');
+  $file = $file_repository->loadByUri($uri);
+  return file_get_content_headers($file);
+}

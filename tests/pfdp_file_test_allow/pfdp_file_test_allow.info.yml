@@ -1,0 +1,5 @@
+name: 'File test allow'
+type: module
+description: 'Support module for pfdp tests.'
+package: 'Access control'
+core_version_requirement: '*'

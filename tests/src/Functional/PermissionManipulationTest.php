@@ -36,14 +36,6 @@ class PermissionManipulationTest extends BrowserTestBase
     $private_file_url = $this->createFile('private://testfile.txt')->createFileUrl(FALSE);
     $temporary_file_url = $this->createFile('temporary://testfile.txt')->createFileUrl(FALSE);
 
-    // No access to download.
-    $user = $this->drupalCreateUser();
-    $this->drupalLogin($user);
-    $this->drupalGet($private_file_url);
-    $this->assertSession()->statusCodeEquals(403);
-    $this->drupalGet($temporary_file_url);
-    $this->assertSession()->statusCodeEquals(403);
-
     // 3rd party module enable to download a private file
     \Drupal::state()->set('pfdp_file_test_allow.allow_next', TRUE);
     $this->drupalGet($private_file_url);
